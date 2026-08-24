@@ -1,49 +1,45 @@
-# Fluxo de Caixa — Teste Técnico Frontend
-
-Bem-vindo(a)! Este projeto é a base para o teste técnico de frontend. Ele contém **apenas** a tela de **Fluxo de Caixa**, extraída de um portal maior, já com o padrão visual e a estrutura de pastas usados no frontend da empresa.
+# Fluxo de Caixa — Teste Técnico
 
 <p align="center">
-  <img src="./src/assets/logo_levdata.png" height="40" alt="LevData" />
+  <img src="./docs/preview.png" alt="Tela de Fluxo de Caixa" width="800" />
 </p>
 
-## O que você vai encontrar aqui
+## 📋 Sobre o teste
 
-- Uma tela única (`Fluxo de Caixa`) 100% funcional no frontend, com cards de resumo, gráfico de linha, tabelas de entradas/saídas, alertas e ações rápidas.
-- Um cabeçalho simplificado (logo + avatar/usuário), sem menu lateral e sem dropdown — este teste libera acesso a uma única empresa, então esses elementos de navegação não são necessários.
-- **Nenhuma dependência de backend, autenticação ou infraestrutura.** Tudo que existia de login (AWS Cognito/Amplify), variáveis de ambiente com chaves/segredos e chamadas de API real foi removido. Os dados exibidos hoje são **mockados/estáticos**, direto no componente.
+Este repositório contém a tela de **Fluxo de Caixa** acima, já implementada com toda a interface: cards de resumo, gráfico de linha, tabelas de entradas e saídas, alertas e ações rápidas. Os dados exibidos hoje são estáticos, prontos para serem substituídos por dados reais.
 
-## O que é esperado do candidato
+## 🎯 O que você vai construir
 
-O objetivo do teste é você **construir a API e a conexão com banco de dados do zero** e trazer os dados reais para esta tela, substituindo os valores mockados em [`src/project/dashboards-levdata/CashFlow/index.js`](./src/project/dashboards-levdata/CashFlow/index.js).
+Implemente a API e a conexão com um banco de dados, trazendo dados reais para o lugar dos dados estáticos em [`src/project/dashboards-levdata/CashFlow/index.js`](./src/project/dashboards-levdata/CashFlow/index.js).
 
-Fique à vontade para:
+Você tem liberdade para:
 
-- Criar a camada de chamadas HTTP (services/api) que preferir.
-- Adicionar gerenciamento de estado (Context, Redux, React Query, etc.) se achar necessário.
-- Ajustar a modelagem dos dados conforme a API/banco que você construir.
+- Definir a modelagem dos dados e o banco de dados que preferir;
+- Criar a camada de chamadas HTTP (services/api) do jeito que achar melhor;
+- Adicionar gerenciamento de estado (Context, Redux, React Query, etc.), se achar necessário.
 
-> Mantenha o padrão visual e a organização de pastas já existentes (`src/components`, `src/project`, `styledComponentsStyles.js`, `theme`) sempre que possível — isso é parte do que estamos avaliando.
+> Procure manter a organização de pastas e o padrão visual já utilizados no projeto (`src/components`, `src/project`, `styledComponentsStyles.js`, `theme`) — isso também faz parte da avaliação.
 
 ## 🎁 Bônus
 
-Como diferencial, deixe a tela **responsiva** para diferentes tamanhos de tela (desktop, tablet e mobile). Hoje o layout foi pensado para desktop; adaptar os cards, o gráfico e as tabelas para telas menores conta pontos extras.
+Deixe a tela **responsiva** para diferentes tamanhos de tela (desktop, tablet e mobile). O layout atual foi pensado para desktop; adaptar os cards, o gráfico e as tabelas para telas menores conta pontos extras.
 
-## Stack utilizada
+## 🧰 Stack
 
 | Camada | Tecnologia |
 | --- | --- |
-| Framework | React 18 (Create React App / `react-scripts`) |
+| Framework | React 18 (Create React App) |
 | UI | Material UI (MUI v5) |
 | Estilização | styled-components + tema próprio (`src/theme`, `src/styledThemeOn`) |
 | Gráficos | `@nivo/line` |
 | Rotas | React Router v6 |
 
-## Pré-requisitos
+## ⚙️ Pré-requisitos
 
 - [Node.js](https://nodejs.org/) 18 ou superior
 - npm 9 ou superior (vem junto com o Node)
 
-## Como rodar o projeto
+## ▶️ Como rodar
 
 ```bash
 # 1. Instale as dependências
@@ -53,9 +49,9 @@ npm install
 npm start
 ```
 
-A aplicação abrirá automaticamente em [http://localhost:3000](http://localhost:3000). Qualquer alteração salva no código recarrega a página automaticamente.
+A aplicação abre em [http://localhost:3000](http://localhost:3000). Alterações salvas no código recarregam a página automaticamente.
 
-### Outros scripts disponíveis
+## 📜 Scripts disponíveis
 
 | Comando | O que faz |
 | --- | --- |
@@ -64,7 +60,7 @@ A aplicação abrirá automaticamente em [http://localhost:3000](http://localhos
 | `npm run lint` | Roda o ESLint no código-fonte |
 | `npm run format` | Formata o código-fonte com o Prettier |
 
-## Estrutura de pastas
+## 📁 Estrutura de pastas
 
 ```
 src/
@@ -72,14 +68,14 @@ src/
 ├── components/
 │   ├── ErrorBoundary/                # captura erros de renderização
 │   ├── Layout/
-│   │   ├── Navbar/                   # cabeçalho (logo + avatar/nome)
+│   │   ├── Navbar/                   # cabeçalho
 │   │   ├── StandardLayout/           # layout padrão das páginas
 │   │   └── Footer/
 │   ├── MTWActions/                   # botões reutilizáveis (voltar, navegação)
 │   └── ProductHeader/                # cabeçalho de página (título, breadcrumb)
 ├── project/
 │   └── dashboards-levdata/
-│       └── CashFlow/                 # 👉 a tela de Fluxo de Caixa (ponto de partida)
+│       └── CashFlow/                 # tela de Fluxo de Caixa
 ├── styledComponentsStyles.js         # estilos compartilhados (styled-components)
 ├── styledThemeOn/                    # tema usado pelo styled-components
 ├── theme/                            # tema usado pelo MUI
@@ -87,4 +83,4 @@ src/
 └── index.js                          # ponto de entrada
 ```
 
-Boa sorte no teste! 🚀
+Boa sorte! 🚀

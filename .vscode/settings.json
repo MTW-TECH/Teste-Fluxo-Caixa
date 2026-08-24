@@ -1,0 +1,7 @@
+{
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "search.exclude": {
+    "**/*.code-search": false,
+    "**/bower_components": false
+  }
+}

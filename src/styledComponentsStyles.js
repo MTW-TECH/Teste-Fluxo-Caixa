@@ -86,17 +86,24 @@ export const ProductIcon = styled.button`
 `;
 
 //|_|‾|_|-----|_|‾|_|‾|_ WRAPPERS _|‾|_|‾|_|-----|_|‾|_| // 2
-export const ProductLayout = styled.div`s
-  padding: 0px 55px;
+export const ProductLayout = styled.div`
+  padding: 0;
   padding-bottom: 10px;
   background-color: ${({ styledtheme }) =>
     styledtheme.palette.background.secondary};
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
   min-height: ${({ minHeight }) => (minHeight ? minHeight : 'auto')};
   justify-content: space-between;
+
+  @media (min-width: 900px) {
+    padding-left: 55px;
+    padding-right: 55px;
+  }
 `;
 
 export const BeforeContainer = styled.div`
@@ -129,6 +136,8 @@ export const Navbar = styled.div`
 
 export const FirstRowContainer = styled.div`
   display: block;
+  width: 100%;
+  box-sizing: border-box;
   background-color: #ffffff;
   padding: 16px 20px 16px 20px;
   border-radius: ${radBig};

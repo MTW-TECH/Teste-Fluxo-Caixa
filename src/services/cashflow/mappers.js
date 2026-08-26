@@ -183,3 +183,40 @@ export function mapOutflowsPage(apiPage) {
     total: apiPage?.total ?? 0
   };
 }
+
+const ALERT_STYLES = {
+  aviso: {
+    background: '#fff7ed',
+    border: '1px solid #f59e0b',
+    iconColor: '#f59e0b'
+  },
+  critico: {
+    background: '#fef2f2',
+    border: '1px solid #ef4444',
+    iconColor: '#ef4444'
+  }
+};
+
+export function mapAlerts(apiResponse) {
+  const items = apiResponse?.items || [];
+  return items.map((item) => ({
+    id: item.id,
+    titulo: item.titulo,
+    mensagem: item.mensagem,
+    severidade: item.severidade,
+    estilo: ALERT_STYLES[item.severidade] || ALERT_STYLES.aviso
+  }));
+}
+
+/** Formato fixo do header: "RAZÃO SOCIAL - CNPJ" */
+export function mapCompany(apiCompany) {
+  if (!apiCompany?.razao_social || !apiCompany?.cnpj) {
+    return null;
+  }
+  return {
+    id: apiCompany.id,
+    razaoSocial: apiCompany.razao_social,
+    cnpj: apiCompany.cnpj,
+    displayLabel: `${apiCompany.razao_social} - ${apiCompany.cnpj}`
+  };
+}

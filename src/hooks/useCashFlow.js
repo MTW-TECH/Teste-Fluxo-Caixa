@@ -1,5 +1,7 @@
 import { useQueries } from '@tanstack/react-query';
 import {
+  getAlerts,
+  getCompany,
   getInflows,
   getOutflows,
   getSummary,
@@ -8,6 +10,8 @@ import {
 } from '../services/cashflow/cashflowApi';
 import {
   getTimelineYMax,
+  mapAlerts,
+  mapCompany,
   mapInflowsPage,
   mapOutflowsPage,
   mapSummary,
@@ -65,16 +69,29 @@ export function useCashFlow({ page = 1, perPage = 20 } = {}) {
         queryFn: ({ signal }) =>
           getOutflows({ de, ate, page, perPage, signal }),
         select: mapOutflowsPage
+      },
+      {
+        queryKey: ['cashflow', 'alerts'],
+        queryFn: ({ signal }) => getAlerts({ signal }),
+        select: mapAlerts
+      },
+      {
+        queryKey: ['cashflow', 'company'],
+        queryFn: ({ signal }) => getCompany({ signal }),
+        select: mapCompany
       }
     ]
   });
 
-  const [summaryQ, trendsQ, timelineQ, inflowsQ, outflowsQ] = results;
+  const [summaryQ, trendsQ, timelineQ, inflowsQ, outflowsQ, alertsQ, companyQ] =
+    results;
 
-  const isLoading = results.some((q) => q.isLoading);
+  const coreResults = [summaryQ, trendsQ, timelineQ, inflowsQ, outflowsQ];
+
+  const isLoading = coreResults.some((q) => q.isLoading);
   const isFetching = results.some((q) => q.isFetching);
-  const isError = results.some((q) => q.isError);
-  const firstError = results.find((q) => q.isError)?.error;
+  const isError = coreResults.some((q) => q.isError);
+  const firstError = coreResults.find((q) => q.isError)?.error;
 
   const lineData = timelineQ.data || [];
 
@@ -89,6 +106,11 @@ export function useCashFlow({ page = 1, perPage = 20 } = {}) {
     yMax: getTimelineYMax(lineData),
     rowsEntradas: inflowsQ.data?.rows || [],
     rowsSaidas: outflowsQ.data?.rows || [],
+    alertas: alertsQ.data || [],
+    isAlertsLoading: alertsQ.isLoading,
+    company: companyQ.data,
+    companyLabel: companyQ.data?.displayLabel ?? null,
+    isCompanyLoading: companyQ.isLoading,
     refetchAll: () => Promise.all(results.map((q) => q.refetch()))
   };
 }

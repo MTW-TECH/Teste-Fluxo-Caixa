@@ -6,7 +6,7 @@
 
 ## 📋 Sobre o teste
 
-Este repositório contém a tela de **Fluxo de Caixa** acima, com cards, gráfico, tabelas, alertas e ações rápidas. Os dados dos blocos principais vêm da API Flask (backend separado); alertas e ações rápidas seguem estáticos.
+Este repositório contém a tela de **Fluxo de Caixa** acima, com cards, gráfico, tabelas, alertas e ações rápidas. Os dados vêm da API Flask (backend separado); ações rápidas seguem estáticas.
 
 ## 🎯 Integração com a API
 
@@ -19,13 +19,15 @@ A tela consome a API Flask do repositório **Teste-Fluxo-Caixa-Backend** (soment
 | Gráfico | `GET /api/cashflow/timeline` |
 | Entradas | `GET /api/cashflow/inflows` |
 | Saídas | `GET /api/cashflow/outflows` |
+| Alertas | `GET /api/cashflow/alerts` |
+| Empresa (header) | `GET /api/cashflow/company` |
 
 Camada no front:
 
 - `src/services/http/httpClient.js` — `fetch` + timeout (`AbortController`) + erros `{ erro }`
 - `src/services/cashflow/` — API e mappers (moeda string → pt-BR, datas, cores Nivo)
 - `src/hooks/useCashFlow.js` — TanStack React Query (`useQueries`, cache 1 min)
-- Alertas e ações rápidas continuam estáticos (sem endpoint no back)
+- Ações rápidas continuam estáticas (sem endpoint no back)
 
 ## 🎁 Bônus
 

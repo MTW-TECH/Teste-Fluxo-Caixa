@@ -309,15 +309,17 @@ function ProductHeader({
                         />
                       ) : null}
                     </PageTitleGroup>
-                    <PageCompanyBox alert={alert}>
-                      <BusinessIcon
-                        sx={{
-                          width: '13px',
-                          marginBottom: '1px'
-                        }}
-                      />
-                      {cnpj}
-                    </PageCompanyBox>
+                    {cnpj ? (
+                      <PageCompanyBox alert={alert}>
+                        <BusinessIcon
+                          sx={{
+                            width: '13px',
+                            marginBottom: '1px'
+                          }}
+                        />
+                        {cnpj}
+                      </PageCompanyBox>
+                    ) : null}
                   </PageInformation>
                 </PageInfoRowLeft>
               </div>
@@ -482,15 +484,17 @@ function ProductHeader({
                         </div>
                       ) : null}
                     </PageTitleGroup>
-                    <PageCompanyBox alert={alert}>
-                      <BusinessIcon
-                        sx={{
-                          width: '13px',
-                          marginBottom: '1px'
-                        }}
-                      />
-                      {cnpj}
-                    </PageCompanyBox>
+                    {cnpj ? (
+                      <PageCompanyBox alert={alert}>
+                        <BusinessIcon
+                          sx={{
+                            width: '13px',
+                            marginBottom: '1px'
+                          }}
+                        />
+                        {cnpj}
+                      </PageCompanyBox>
+                    ) : null}
                   </PageInformation>
                 </PageInfoRowLeft>
               </div>
@@ -535,15 +539,17 @@ function ProductHeader({
                         <GroupOfPagesNavButton groupOfPages={groupOfPages} />
                       ) : null}
                     </PageTitleGroup>
-                    <PageCompanyBox alert={alert}>
-                      <BusinessIcon
-                        sx={{
-                          width: '13px',
-                          marginBottom: '1px'
-                        }}
-                      />
-                      {cnpj}
-                    </PageCompanyBox>
+                    {cnpj ? (
+                      <PageCompanyBox alert={alert}>
+                        <BusinessIcon
+                          sx={{
+                            width: '13px',
+                            marginBottom: '1px'
+                          }}
+                        />
+                        {cnpj}
+                      </PageCompanyBox>
+                    ) : null}
                   </PageInformation>
                 </PageInfoRowLeft>
               </div>

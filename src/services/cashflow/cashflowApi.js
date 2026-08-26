@@ -46,3 +46,11 @@ export function getOutflows({ de, ate, page = 1, perPage = 20, signal } = {}) {
     }
   });
 }
+
+export function getAlerts({ signal } = {}) {
+  return httpGet('/api/cashflow/alerts', { signal });
+}
+
+export function getCompany({ signal } = {}) {
+  return httpGet('/api/cashflow/company', { signal });
+}

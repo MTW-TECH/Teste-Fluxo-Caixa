@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar as MuiAvatar } from '@mui/material';
+import { Avatar as MuiAvatar, Box } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 // COMPONENTS
 import LogoLevdata from '../../../assets/logo_levdata.png';
@@ -14,13 +14,14 @@ function Navbar() {
   já que o candidato terá acesso a uma única empresa/tela.
   */
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
-        padding: '12px 32px',
+        px: { xs: 2, sm: 3, md: 4 },
+        py: 1.5,
         backgroundColor: '#FFFFFF',
         borderBottom: '1px solid #EAECF0',
         boxSizing: 'border-box'
@@ -39,7 +40,7 @@ function Navbar() {
           <CompanyName styledtheme={styledtheme}>LevData</CompanyName>
         </div>
       </Avatar>
-    </div>
+    </Box>
   );
 }
 

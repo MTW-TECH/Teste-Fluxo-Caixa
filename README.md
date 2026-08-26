@@ -6,19 +6,26 @@
 
 ## 📋 Sobre o teste
 
-Este repositório contém a tela de **Fluxo de Caixa** acima, já implementada com toda a interface: cards de resumo, gráfico de linha, tabelas de entradas e saídas, alertas e ações rápidas. Os dados exibidos hoje são estáticos, prontos para serem substituídos por dados reais.
+Este repositório contém a tela de **Fluxo de Caixa** acima, com cards, gráfico, tabelas, alertas e ações rápidas. Os dados dos blocos principais vêm da API Flask (backend separado); alertas e ações rápidas seguem estáticos.
 
-## 🎯 O que você vai construir
+## 🎯 Integração com a API
 
-Implemente a API e a conexão com um banco de dados, trazendo dados reais para o lugar dos dados estáticos em [`src/project/dashboards-levdata/CashFlow/index.js`](./src/project/dashboards-levdata/CashFlow/index.js).
+A tela consome a API Flask do repositório **Teste-Fluxo-Caixa-Backend** (somente leitura):
 
-Você tem liberdade para:
+| Bloco da UI | Endpoint |
+| --- | --- |
+| Cards | `GET /api/cashflow/summary` |
+| Tendência | `GET /api/cashflow/trends` |
+| Gráfico | `GET /api/cashflow/timeline` |
+| Entradas | `GET /api/cashflow/inflows` |
+| Saídas | `GET /api/cashflow/outflows` |
 
-- Definir a modelagem dos dados e o banco de dados que preferir;
-- Criar a camada de chamadas HTTP (services/api) do jeito que achar melhor;
-- Adicionar gerenciamento de estado (Context, Redux, React Query, etc.), se achar necessário.
+Camada no front:
 
-> Procure manter a organização de pastas e o padrão visual já utilizados no projeto (`src/components`, `src/project`, `styledComponentsStyles.js`, `theme`) — isso também faz parte da avaliação.
+- `src/services/http/httpClient.js` — `fetch` + timeout (`AbortController`) + erros `{ erro }`
+- `src/services/cashflow/` — API e mappers (moeda string → pt-BR, datas, cores Nivo)
+- `src/hooks/useCashFlow.js` — TanStack React Query (`useQueries`, cache 1 min)
+- Alertas e ações rápidas continuam estáticos (sem endpoint no back)
 
 ## 🎁 Bônus
 
@@ -32,12 +39,27 @@ Deixe a tela **responsiva** para diferentes tamanhos de tela (desktop, tablet e 
 | UI | Material UI (MUI v5) |
 | Estilização | styled-components + tema próprio (`src/theme`, `src/styledThemeOn`) |
 | Gráficos | `@nivo/line` |
+| Dados / cache | TanStack React Query v5 |
 | Rotas | React Router v6 |
 
 ## ⚙️ Pré-requisitos
 
 - [Node.js](https://nodejs.org/) 18 ou superior
 - npm 9 ou superior (vem junto com o Node)
+- Backend Flask em `http://127.0.0.1:5000` com `CORS_ORIGINS=http://localhost:3000`
+
+## 🔐 Variáveis de ambiente
+
+Copie [`.env.example`](./.env.example) para `.env`:
+
+| Variável | Descrição | Exemplo |
+| --- | --- | --- |
+| `REACT_APP_API_URL` | Base URL da API | `http://127.0.0.1:5000` |
+| `REACT_APP_API_TIMEOUT_MS` | Timeout das requisições (ms) | `10000` |
+| `REACT_APP_CASHFLOW_DE` | Início do período (`YYYY-MM-DD`) | `2026-03-01` |
+| `REACT_APP_CASHFLOW_ATE` | Fim do período | `2026-03-31` |
+
+Se `DE`/`ATE` forem omitidos, a API usa o mês corrente. Com `REPOSITORIO=falso` no back, use mar/2026 (dados do seed).
 
 ## ▶️ Como rodar
 
@@ -45,7 +67,9 @@ Deixe a tela **responsiva** para diferentes tamanhos de tela (desktop, tablet e 
 # 1. Instale as dependências
 npm install
 
-# 2. Suba o servidor de desenvolvimento
+# 2. Configure o .env (veja acima) e suba o backend
+
+# 3. Suba o servidor de desenvolvimento
 npm start
 ```
 
@@ -73,6 +97,12 @@ src/
 │   │   └── Footer/
 │   ├── MTWActions/                   # botões reutilizáveis (voltar, navegação)
 │   └── ProductHeader/                # cabeçalho de página (título, breadcrumb)
+├── hooks/
+│   └── useCashFlow.js                # React Query: summary, trends, timeline, tabelas
+├── services/
+│   ├── http/httpClient.js            # fetch + timeout + erros
+│   ├── queryClient.js                # defaults de cache
+│   └── cashflow/                     # API + mappers
 ├── project/
 │   └── dashboards-levdata/
 │       └── CashFlow/                 # tela de Fluxo de Caixa
@@ -80,7 +110,7 @@ src/
 ├── styledThemeOn/                    # tema usado pelo styled-components
 ├── theme/                            # tema usado pelo MUI
 ├── App.js                            # rotas da aplicação
-└── index.js                          # ponto de entrada
+└── index.js                          # ponto de entrada + QueryClientProvider
 ```
 
 Boa sorte! 🚀

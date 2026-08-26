@@ -150,8 +150,15 @@ export const PageInfoRow = styled.div`
 
 export const PageInfoRowLeft = styled.div`
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
+  row-gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+
+  @media (min-width: 900px) {
+    flex-wrap: nowrap;
+  }
 `;
 
 export const PageInformation = styled.div`
@@ -166,15 +173,20 @@ export const PageTitleGroup = styled.div`
   display: flex;
   align-items: center;
   column-gap: 0.9rem;
+  flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
 `;
 
 export const PageCompanyBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 10px;
-  max-width: fit-content;
-  height: 20px;
+  line-height: 1.2;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 20px;
   margin-left: 10px;
   column-gap: 5px;
   border: ${(props) =>
@@ -184,6 +196,9 @@ export const PageCompanyBox = styled.div`
   border-radius: 5px;
   padding: 0px 6px 0px 6px;
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const TableTop = styled.div`
